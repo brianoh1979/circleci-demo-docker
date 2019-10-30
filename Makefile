@@ -17,7 +17,7 @@ build-native: $(GOFILES)
 #workdir/contacts: $(GOFILES)
 #	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o workdir/contacts .
 
-test: test-all
+#test: test-all
 
 #test-all:
 #	@go test -v $(GOPACKAGES)
