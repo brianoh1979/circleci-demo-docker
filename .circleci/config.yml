@@ -112,7 +112,11 @@ jobs:
       - run:
           name: Build service
           command: make
-
+     
+      - run:
+          name: check local setup
+          command: |
+            docker-compose build web
 #      - store_artifacts:
 #          path: /tmp/test-results
 #          destination: raw-test-output
