@@ -19,5 +19,5 @@ build-native: $(GOFILES)
 
 test: test-all
 
-test-all:
-	@go test -v $(GOPACKAGES)
+#test-all:
+#	@go test -v $(GOPACKAGES)
