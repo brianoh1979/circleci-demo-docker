@@ -16,7 +16,7 @@ jobs:
     environment:
       TEST_RESULTS: /tmp/test-results
     
-    parallelism: 25
+#    parallelism: 25
 
     steps:
       - checkout
@@ -71,9 +71,9 @@ jobs:
 #            chmod +x ~/docker-compose
 #            sudo mv ~/docker-compose /usr/local/bin/docker-compose
 
-      - run:
-          name: Build service
-          command: make
+#      - run:
+#          name: Build service
+#          command: make
 
 #      - run:
 #          name: Build and push Docker image
@@ -92,9 +92,39 @@ jobs:
           paths:
             - project
 
+  build-and-test:
+    machine:
+      image: ubuntu-1604:201903-01    # pins image to specific version
+      docker_layer_caching: true
+
+    parallelism: 25
+
+    steps:
+ #     - run:
+ #         name: prep directories for restoring snapshot
+ #         command: |
+ #           sudo chmod -R 1777 /home/circleci/fa
+
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /home/circleci/
+
+      - run:
+          name: Build service
+          command: make
+
 #      - store_artifacts:
 #          path: /tmp/test-results
 #          destination: raw-test-output
 
 #      - store_test_results:
 #          path: /tmp/test-results
+workflows:
+  version: 2
+  beta-create-image:
+    jobs:
+      - build
+      - build-and-test:
+          requires:
+            - build
+
