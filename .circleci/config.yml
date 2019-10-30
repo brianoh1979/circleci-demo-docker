@@ -63,7 +63,14 @@ jobs:
           command: |
             curl -L https://github.com/docker/compose/releases/download/1.19.0/$
             chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+            mv ~/docker-compose /usr/local/bin/docker-compose
+
+#      - run:
+#          name: Install Docker Compose
+#          command: |
+#            curl -L https://github.com/docker/compose/releases/download/1.19.0/$
+#            chmod +x ~/docker-compose
+#            sudo mv ~/docker-compose /usr/local/bin/docker-compose
 
       - run:
           name: Build service
